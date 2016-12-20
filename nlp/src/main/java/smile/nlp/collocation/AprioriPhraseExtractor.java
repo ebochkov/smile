@@ -51,7 +51,7 @@ public class AprioriPhraseExtractor {
      */
     public ArrayList<ArrayList<NGram>> extract(Collection<String[]> sentences, int maxNGramSize, int minFrequency) {
         ArrayList<Set<NGram>> features = new ArrayList<>(maxNGramSize + 1);
-        features.add(new HashSet<>());
+        features.add(new HashSet<NGram>());
         for (int n = 1; n <= maxNGramSize; n++) {
             Map<NGram, Integer> candidates = new HashMap<>();
             Set<NGram> feature = new HashSet<>();

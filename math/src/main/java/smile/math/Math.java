@@ -2953,154 +2953,154 @@ public class Math {
         }
     }
 
-    /**
-     * Rescales each column of a matrix to range [0, 1].
-     */
-    public static java.util.function.Function<double[], double[]> rescale(double[][] x) {
-        return rescale(x, 0.0, 1.0);
-    }
+//    /**
+//     * Rescales each column of a matrix to range [0, 1].
+//     */
+//    public static java.util.function.Function<double[], double[]> rescale(double[][] x) {
+//        return rescale(x, 0.0, 1.0);
+//    }
 
     /**
      * Rescales each column of a matrix to range [lo, hi].
      * @param lo lower limit of range
      * @param hi upper limit of range
      */
-    public static java.util.function.Function<double[], double[]> rescale(double[][] x, double lo, double hi) {
-        int n = x.length;
-        int p = x[0].length;
-
-        double[] min = colMin(x);
-        double[] max = colMax(x);
-
-        for (int j = 0; j < p; j++) {
-            double scale = max[j] - min[j];
-            if (!Math.isZero(scale)) {
-                for (int i = 0; i < n; i++) {
-                    x[i][j] = (x[i][j] - min[j]) / scale;
-                }
-            } else {
-                for (int i = 0; i < n; i++) {
-                    x[i][j] = 0.5;
-                }
-            }
-        }
-
-        return (double[] xi) -> {
-            if (xi.length != p)
-                throw new IllegalArgumentException(String.format("array size: %d, expected: %d", xi.length, p));
-
-            double l = hi - lo;
-            double[] y = new double[p];
-            for (int j = 0; j < p; j++) {
-                double scale = max[j] - min[j];
-                if (!Math.isZero(scale)) {
-                    y[j] = (xi[j] - min[j]) / scale;
-                } else {
-                    y[j] = 0.5;
-                }
-                y[j] = lo + l * y[j];
-            }
-
-            return y;
-        };
-    }
+//    public static java.util.function.Function<double[], double[]> rescale(double[][] x, double lo, double hi) {
+//        int n = x.length;
+//        int p = x[0].length;
+//
+//        double[] min = colMin(x);
+//        double[] max = colMax(x);
+//
+//        for (int j = 0; j < p; j++) {
+//            double scale = max[j] - min[j];
+//            if (!Math.isZero(scale)) {
+//                for (int i = 0; i < n; i++) {
+//                    x[i][j] = (x[i][j] - min[j]) / scale;
+//                }
+//            } else {
+//                for (int i = 0; i < n; i++) {
+//                    x[i][j] = 0.5;
+//                }
+//            }
+//        }
+//
+//        return (double[] xi) -> {
+//            if (xi.length != p)
+//                throw new IllegalArgumentException(String.format("array size: %d, expected: %d", xi.length, p));
+//
+//            double l = hi - lo;
+//            double[] y = new double[p];
+//            for (int j = 0; j < p; j++) {
+//                double scale = max[j] - min[j];
+//                if (!Math.isZero(scale)) {
+//                    y[j] = (xi[j] - min[j]) / scale;
+//                } else {
+//                    y[j] = 0.5;
+//                }
+//                y[j] = lo + l * y[j];
+//            }
+//
+//            return y;
+//        };
+//    }
 
     /**
      * Standardizes each column of a matrix to 0 mean and unit variance.
      */
-    public static java.util.function.Function<double[], double[]> standardize(double[][] x) {
-        int n = x.length;
-        int p = x[0].length;
-
-        double[] center = colMean(x);
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < p; j++) {
-                x[i][j] = x[i][j] - center[j];
-            }
-        }
-
-        double[] scale = new double[p];
-        for (int j = 0; j < p; j++) {
-            for (int i = 0; i < n; i++) {
-                scale[j] += Math.sqr(x[i][j]);
-            }
-            scale[j] = Math.sqrt(scale[j] / (n-1));
-
-            if (!Math.isZero(scale[j])) {
-                for (int i = 0; i < n; i++) {
-                    x[i][j] /= scale[j];
-                }
-            }
-        }
-
-        return (double[] xi) -> {
-            if (xi.length != p)
-                throw new IllegalArgumentException(String.format("array size: %d, expected: %d", xi.length, p));
-
-            double[] y = new double[p];
-            for (int j = 0; j < p; j++) {
-                if (!Math.isZero(scale[j])) {
-                    y[j] = (xi[j] - center[j]) / scale[j];
-                } else {
-                    y[j] = 0.0;
-                }
-            }
-
-            return y;
-        };
-    }
+//    public static java.util.function.Function<double[], double[]> standardize(double[][] x) {
+//        int n = x.length;
+//        int p = x[0].length;
+//
+//        double[] center = colMean(x);
+//        for (int i = 0; i < n; i++) {
+//            for (int j = 0; j < p; j++) {
+//                x[i][j] = x[i][j] - center[j];
+//            }
+//        }
+//
+//        double[] scale = new double[p];
+//        for (int j = 0; j < p; j++) {
+//            for (int i = 0; i < n; i++) {
+//                scale[j] += Math.sqr(x[i][j]);
+//            }
+//            scale[j] = Math.sqrt(scale[j] / (n-1));
+//
+//            if (!Math.isZero(scale[j])) {
+//                for (int i = 0; i < n; i++) {
+//                    x[i][j] /= scale[j];
+//                }
+//            }
+//        }
+//
+//        return (double[] xi) -> {
+//            if (xi.length != p)
+//                throw new IllegalArgumentException(String.format("array size: %d, expected: %d", xi.length, p));
+//
+//            double[] y = new double[p];
+//            for (int j = 0; j < p; j++) {
+//                if (!Math.isZero(scale[j])) {
+//                    y[j] = (xi[j] - center[j]) / scale[j];
+//                } else {
+//                    y[j] = 0.0;
+//                }
+//            }
+//
+//            return y;
+//        };
+//    }
 
     /**
      * Unitizes each column of a matrix to unit length (L_2 norm).
      * @param centerizing If true, centerize each column to 0 mean.
      */
-    public static java.util.function.Function<double[], double[]> normalize(double[][] x, boolean centerizing) {
-        int n = x.length;
-        int p = x[0].length;
-
-        double[] center = colMean(x);
-        if (centerizing) {
-            for (int i = 0; i < n; i++) {
-                for (int j = 0; j < p; j++) {
-                    x[i][j] = x[i][j] - center[j];
-                }
-            }
-        }
-
-        double[] scale = new double[p];
-        for (int j = 0; j < p; j++) {
-            for (int i = 0; i < n; i++) {
-                scale[j] += Math.sqr(x[i][j]);
-            }
-            scale[j] = Math.sqrt(scale[j]);
-        }
-
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < p; j++) {
-                if (!Math.isZero(scale[j])) {
-                    x[i][j] /= scale[j];
-                }
-            }
-        }
-
-        return (double[] xi) -> {
-            if (xi.length != p)
-                throw new IllegalArgumentException(String.format("array size: %d, expected: %d", xi.length, p));
-
-            double[] y = new double[p];
-            for (int j = 0; j < p; j++) {
-                if (centerizing) y[j] = xi[j] - center[j];
-
-                if (!Math.isZero(scale[j])) {
-                    y[j] /= scale[j];
-                } else {
-                    y[j] = 0.0;
-                }
-            }
-
-            return y;
-        };
-    }
+//    public static java.util.function.Function<double[], double[]> normalize(double[][] x, boolean centerizing) {
+//        int n = x.length;
+//        int p = x[0].length;
+//
+//        double[] center = colMean(x);
+//        if (centerizing) {
+//            for (int i = 0; i < n; i++) {
+//                for (int j = 0; j < p; j++) {
+//                    x[i][j] = x[i][j] - center[j];
+//                }
+//            }
+//        }
+//
+//        double[] scale = new double[p];
+//        for (int j = 0; j < p; j++) {
+//            for (int i = 0; i < n; i++) {
+//                scale[j] += Math.sqr(x[i][j]);
+//            }
+//            scale[j] = Math.sqrt(scale[j]);
+//        }
+//
+//        for (int i = 0; i < n; i++) {
+//            for (int j = 0; j < p; j++) {
+//                if (!Math.isZero(scale[j])) {
+//                    x[i][j] /= scale[j];
+//                }
+//            }
+//        }
+//
+//        return (double[] xi) -> {
+//            if (xi.length != p)
+//                throw new IllegalArgumentException(String.format("array size: %d, expected: %d", xi.length, p));
+//
+//            double[] y = new double[p];
+//            for (int j = 0; j < p; j++) {
+//                if (centerizing) y[j] = xi[j] - center[j];
+//
+//                if (!Math.isZero(scale[j])) {
+//                    y[j] /= scale[j];
+//                } else {
+//                    y[j] = 0.0;
+//                }
+//            }
+//
+//            return y;
+//        };
+//    }
 
     /**
      * Unitize an array so that L2 norm of x = 1.

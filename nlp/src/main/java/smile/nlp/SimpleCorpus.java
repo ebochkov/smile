@@ -235,7 +235,7 @@ public class SimpleCorpus implements Corpus {
     @Override
     public Iterator<Text> search(String term) {
         if (invertedFile.containsKey(term)) {
-            ArrayList<Text> hits = new ArrayList<>(invertedFile.get(term));
+            ArrayList<Text> hits = new ArrayList<Text>(invertedFile.get(term));
             return hits.iterator();
         } else {
             return Collections.emptyIterator();

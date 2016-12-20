@@ -279,7 +279,7 @@ public class FPGrowth {
             int nprocs = MulticoreExecutor.getThreadPoolSize();
             List<List<HeaderTableItem>> headers = new ArrayList<>();
             for (int i = 0; i < 2*nprocs; i++) {
-                headers.add(new ArrayList<>());
+                headers.add(new ArrayList<HeaderTableItem>());
             }
             
             for (int i = fptree.headerTable.length; i-- > 0;) {
