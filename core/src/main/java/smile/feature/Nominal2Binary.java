@@ -16,6 +16,8 @@
 
 package smile.feature;
 
+import java.io.Serializable;
+
 import smile.data.Attribute;
 import smile.data.NominalAttribute;
 import smile.data.NumericAttribute;
@@ -29,7 +31,7 @@ import smile.data.NumericAttribute;
  * 
  * @author Haifeng Li
  */
-public class Nominal2Binary implements Feature<double[]> {
+public class Nominal2Binary implements Feature<double[]>, Serializable {
     /**
      * The variable attributes.
      */

@@ -25,7 +25,7 @@ import smile.data.Attribute;
  * 
  * @author Haifeng Li
  */
-public abstract class RegressionTrainer <T> {
+public abstract class RegressionTrainer <T>{
     /**
      * The feature attributes. This is optional since most classifiers can only
      * work on real-valued attributes.

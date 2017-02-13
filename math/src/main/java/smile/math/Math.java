@@ -112,9 +112,9 @@ public class Math {
                 // Otherwise, all trees of random forest are same except the main thread one.
 
                 java.security.SecureRandom sr = new java.security.SecureRandom();
-                byte[] bytes = sr.generateSeed(Long.BYTES);
+                byte[] bytes = sr.generateSeed(8);
                 long seed = 0;
-                for (int i = 0; i < Long.BYTES; i++) {
+                for (int i = 0; i < 8; i++) {
                     seed <<= 8;
                     seed |= (bytes[i] & 0xFF);
                 }
